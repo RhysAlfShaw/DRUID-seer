@@ -26,7 +26,7 @@ os.makedirs("app/templates", exist_ok=True)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
 
-UPLOAD_DIR = "./DRUID/temp"
+UPLOAD_DIR = "uploads/"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
