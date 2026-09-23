@@ -113,21 +113,19 @@ canvas {
     margin-top: 0;
 }
 
-/* Update the existing canvas-wrapper */
 .canvas-wrapper {
     flex-grow: 1;
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Change from center to flex-start for proper scrolling */
-    align-items: flex-start;     /* Change from center to flex-start */
-    overflow: auto;              /* Ensures scrollbars appear when zoomed in */
+    justify-content: flex-start; 
+    align-items: flex-start;    
+    overflow: auto;              
     margin-top: 15px;
 }
 
-/* Update the existing canvas */
+
 canvas { 
     border: 2px solid #475569; 
-    /* Remove 'max-width: 100%' so the canvas can physically expand */
     height: auto; 
     image-rendering: pixelated;
     transform-origin: top left;

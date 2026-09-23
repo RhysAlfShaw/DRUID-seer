@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('viewerCanvas');
     const ctx = canvas.getContext('2d');
     
-    // Store all layers globally
     let dataMain = null;
     let dataBg = null;
     let dataRms = null;
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (layer === 'bg') currentMatrix = dataBg;
         else if (layer === 'rms') currentMatrix = dataRms;
         
-        // Recalculate global min and max for the newly selected matrix
         dataMin = Infinity;
         dataMax = -Infinity;
         for (let y = 0; y < currentMatrix.length; y++) {
@@ -70,21 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (normVal < 0) normVal = 0;
                 if (normVal > 1) normVal = 1;
 
-                // 2. Apply stretch function
                 let stretched = normVal;
                 if (stretch === 'sqrt') {
                     stretched = Math.sqrt(normVal);
                 } else if (stretch === 'log') {
-                    // Standard log stretch: scaled by a factor (e.g., 1000) for contrast
                     const a = 1000;
                     stretched = Math.log(1 + a * normVal) / Math.log(1 + a);
                 } else if (stretch === 'asinh') {
-                    // Standard arcsinh stretch
                     const a = 10;
                     stretched = Math.asinh(a * normVal) / Math.asinh(a);
                 }
 
-                // 3. Map back to 0 - 255 for pixel display
                 const pixelVal = Math.floor(stretched * 255);
 
                 const idx = (y * baseWidth + x) * 4;
@@ -119,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Bind display controls to trigger a redraw
     zoomSlider.addEventListener('input', updateCanvasZoom);
     stretchSelect.addEventListener('change', updateCanvasZoom);
     layerSelect.addEventListener('change', setActiveMatrix);
@@ -127,18 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileTypeSelect = document.getElementById('file_type');
     const fileUploadContainer = document.getElementById('file_upload_container');
 
-    // Toggle file input visibility based on dropdown selection
     fileTypeSelect.addEventListener('change', (event) => {
         if (event.target.value === 'file') {
             fileUploadContainer.style.display = 'block'; // Show it
         } else {
             fileUploadContainer.style.display = 'none';  // Hide it
-            // Optional: clear the file input when hiding
             document.getElementById('fitsFile').value = ""; 
         }
     });
 
-    // Bind slider values to their display spans
     const bindSlider = (id, valId) => {
         const slider = document.getElementById(id);
         const display = document.getElementById(valId);
@@ -163,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileType = document.getElementById('file_type').value;
         const fileInput = document.getElementById('fitsFile').files[0];
 
-        // Basic validation
         if (fileType === 'file' && !fileInput) {
             statusText.innerText = "Please select a local FITS file.";
             return;
@@ -172,9 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
         statusText.innerText = "Processing image with persistent homology...";
 
         const formData = new FormData();
-        formData.append("file_type", fileType); // Always send the string
+        formData.append("file_type", fileType); 
         
-        // Only append the binary file if it's a local upload
         if (fileType === 'file') {
             formData.append("file", fileInput); 
         }
@@ -197,7 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if(data.status === "success") {
                 statusText.innerText = `Found ${data.sources.length} Source.`;
                 
-                // Pass all matrices into the render function
                 renderImageAndContours(
                     data.preview_matrix, 
                     data.background_map, 
@@ -219,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
         dataRms = rms;
         currentSources = sources;
 
-        // Set the active matrix based on dropdown and trigger the first draw
         setActiveMatrix();
     }
 });

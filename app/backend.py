@@ -32,7 +32,6 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @app.get("/")
 async def serve_frontend(request: Request):
-    # Use explicit keyword arguments to satisfy the new Starlette signature
     return templates.TemplateResponse(
         request=request, name="index.html", context={"request": request}
     )
@@ -40,8 +39,8 @@ async def serve_frontend(request: Request):
 
 @app.post("/api/run-druid")
 async def run_druid(
-    file_type: str = Form(...),  # The string from the dropdown
-    file: Optional[UploadFile] = File(None),  # The actual file (can be None)
+    file_type: str = Form(...),
+    file: Optional[UploadFile] = File(None),
     mode: str = Form("radio"),
     det_thresh: float = Form(5.0),
     an_thresh: float = Form(3.0),
@@ -62,23 +61,21 @@ async def run_druid(
         if not file:
             return {"status": "error", "message": "No file uploaded."}
 
-        # 1. Read the uploaded file directly into server memory
         file_bytes = await file.read()
 
-        # 2. Wrap the bytes in a BytesIO object so it behaves like a file
         file_obj_or_path = io.BytesIO(file_bytes)
 
     try:
         findmysource = sf(
-            image=file_obj_or_path,  # image, either a 2d np.array, or path to fits file.
+            image=file_obj_or_path,
             mode=mode,
-            area_limit=area_limit,  # Helps remove noise sources.
-            smooth_sigma=smooth_sigma,  # smooth image before ph analysis, fluxes measured on original image.
-            num_threads=1,  # number of threads, as num_threads increases speed gains decrease.
-            chunksize=20,  # chuncking size for multithreading, only provides minor speedup.
-            max_area_limit=1e5,  # there are size limits on ph analysis this prevent unintentional infinate compute time.
-            working_directory=".",  # where to save outputs and cache results.
-            cache=False,  # Cache/save results to working directory.
+            area_limit=area_limit,
+            smooth_sigma=smooth_sigma,
+            num_threads=1,
+            chunksize=20,
+            max_area_limit=1e5,
+            working_directory=".",
+            cache=False,
         )
 
         findmysource.set_background(
