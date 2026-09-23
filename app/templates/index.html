@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DRUID Web Interface</title>
     <link rel="stylesheet" href="/static/css/style.css">
@@ -44,16 +45,25 @@
                 <input type="range" id="box_size" min="10" max="200" step="10" value="50">
             </div>
             <div class="slider-container">
-                <label>Lifetime limit fraction<span id="lifetime_val">1</span></label>
+                <label>Lifetime limit fraction: <span id="lifetime_val">1</span></label>
                 <input type="range" id="lifetime_limit_fraction" min="0.0" max="10.0" step="0.1" value="1">
             </div>
             <div class="slider-container">
-                <label>Smooth Sigma<span id="smoothsigma_val">1</span></label>
+                <label>Smooth Sigma: <span id="smoothsigma_val">1</span></label>
                 <input type="range" id="smooth_sigma" min="0.0" max="10.0" step="0.1" value="1">
             </div>
 
             <button type="submit">Run DRUID</button>
         </form>
+
+        <div class="reference-links">
+            <h3>Resources & Links</h3>
+            <ul>
+                <li><a href="https://doi.org/10.1093/rasti/rzaf006" target="_blank" rel="noopener noreferrer">DRUID Paper</a></li>
+                <li><a href="https://github.com/RhysAlfShaw/DRUID" target="_blank" rel="noopener noreferrer">DRUID GitHub</a></li>
+                <li><a href="https://github.com/RhysAlfShaw/DRUID-seer" target="_blank" rel="noopener noreferrer">Webservice Source Code</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="main">
@@ -84,7 +94,6 @@
             <canvas id="viewerCanvas"></canvas>
         </div>
     </div>
-
 
     <script src="/static/js/main.js"></script>
 </body>

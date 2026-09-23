@@ -130,3 +130,29 @@ canvas {
     image-rendering: pixelated;
     transform-origin: top left;
 }
+
+.reference-links {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
+.reference-links h3 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.reference-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.reference-links li {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+.reference-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+.reference-links a:hover {
+    text-decoration: underline;
+}
