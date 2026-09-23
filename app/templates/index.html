@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRUID Web Interface</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>DRUID Parameters</h2>
+        <form id="druid-form">
+            <label>Astronomical Image:</label>
+            <select id="file_type">
+                <option value="3c98">Radio Galaxy 3C98</option>
+                <option value="file">Local FITS file...</option>
+            </select>
+            <div id="file_upload_container" style="display: none; margin-top: 10px;">
+                <input type="file" id="fitsFile" accept=".fits,.fit">
+            </div>
+            <label>Mode:</label>
+            <select id="mode">
+                <option value="radio">Radio</option>
+                <option value="optical">Optical</option>
+            </select>
+
+            <div class="slider-container">
+                <label>Detection Thresh: <span id="det_val">5.0</span></label>
+                <input type="range" id="det_thresh" min="1.0" max="10.0" step="0.1" value="5.0">
+            </div>
+
+            <div class="slider-container">
+                <label>Analysis Thresh: <span id="an_val">3.0</span></label>
+                <input type="range" id="an_thresh" min="1.0" max="10.0" step="0.1" value="3.0">
+            </div>
+
+            <div class="slider-container">
+                <label>Area Limit: <span id="area_val">15</span></label>
+                <input type="range" id="area_limit" min="1" max="100" step="1" value="15">
+            </div>
+            
+            <div class="slider-container">
+                <label>Box Size: <span id="box_val">50</span></label>
+                <input type="range" id="box_size" min="10" max="200" step="10" value="50">
+            </div>
+            <div class="slider-container">
+                <label>Lifetime limit fraction<span id="lifetime_val">1</span></label>
+                <input type="range" id="lifetime_limit_fraction" min="0.0" max="10.0" step="0.1" value="1">
+            </div>
+            <div class="slider-container">
+                <label>Smooth Sigma<span id="smoothsigma_val">1</span></label>
+                <input type="range" id="smooth_sigma" min="0.0" max="10.0" step="0.1" value="1">
+            </div>
+
+            <button type="submit">Run DRUID</button>
+        </form>
+    </div>
+
+    <div class="main">
+        <h2>Astronomical Image Viewer</h2>
+        <p id="status">Upload a FITS file or use the example.</p>
+        
+        <div class="zoom-controls">
+            <label>Layer:
+                <select id="layer_select">
+                    <option value="main">Image</option>
+                    <option value="bg">Background Map</option>
+                    <option value="rms">Background RMS</option>
+                </select>
+            </label>
+            <label>Stretch:
+                <select id="stretch_scale">
+                    <option value="linear">Linear</option>
+                    <option value="sqrt">Square Root</option>
+                    <option value="log">Logarithmic</option>
+                    <option value="asinh">Asinh</option>
+                </select>
+            </label>
+            <label>Display Zoom: <span id="zoom_val">100%</span></label>
+            <input type="range" id="zoom_level" min="10" max="500" step="10" value="100">
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="viewerCanvas"></canvas>
+        </div>
+    </div>
+
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

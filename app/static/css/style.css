@@ -1,0 +1,134 @@
+body { 
+    font-family: sans-serif; 
+    display: flex; 
+    margin: 0; 
+    padding: 20px; 
+    background: #0f172a; 
+    color: #f8fafc; 
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.sidebar { 
+    width: 320px; 
+    padding: 20px; 
+    background: #1e293b; 
+    border-radius: 8px; 
+    margin-right: 20px; 
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.main { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    background: #1e293b; 
+    padding: 20px; 
+    border-radius: 8px; 
+    overflow: hidden;
+}
+
+input[type="file"], select { 
+    width: 100%; 
+    padding: 8px; 
+    margin: 8px 0 16px 0; 
+    background: #0f172a; 
+    border: 1px solid #475569; 
+    color: white; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+}
+
+.slider-container {
+    margin-bottom: 16px;
+}
+
+.slider-container label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #94a3b8;
+}
+
+.slider-container span {
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 8px;
+    accent-color: #3b82f6;
+}
+
+button { 
+    background: #3b82f6; 
+    color: white; 
+    border: none; 
+    padding: 12px; 
+    width: 100%; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-top: auto;
+}
+
+button:hover { 
+    background: #2563eb; 
+}
+
+/* .canvas-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    margin-top: 15px;
+}
+
+canvas { 
+    border: 2px solid #475569; 
+    max-width: 100%; 
+    height: auto; 
+    image-rendering: pixelated;
+} */
+
+/* Add styling for the zoom controls */
+.zoom-controls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: #94a3b8;
+}
+
+.zoom-controls input[type="range"] {
+    flex-grow: 1;
+    margin-top: 0;
+}
+
+/* Update the existing canvas-wrapper */
+.canvas-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Change from center to flex-start for proper scrolling */
+    align-items: flex-start;     /* Change from center to flex-start */
+    overflow: auto;              /* Ensures scrollbars appear when zoomed in */
+    margin-top: 15px;
+}
+
+/* Update the existing canvas */
+canvas { 
+    border: 2px solid #475569; 
+    /* Remove 'max-width: 100%' so the canvas can physically expand */
+    height: auto; 
+    image-rendering: pixelated;
+    transform-origin: top left;
+}
