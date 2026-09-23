@@ -1,0 +1,3 @@
+[submodule "DRUID"]
+	path = DRUID
+	url = git@github.com:RhysAlfShaw/DRUID.git
