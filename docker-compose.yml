@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    container_name: druid_web_app
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the local project root to /app for live reloading during development
+      - .:/app
+    working_dir: /app
+    
+    # 3. Update the command to look for backend.py
+    command: conda run --no-capture-output -n DRUID uvicorn app.backend:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
